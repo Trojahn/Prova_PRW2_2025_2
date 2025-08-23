@@ -16,6 +16,14 @@ services:
       - CHOKIDAR_USEPOLLING=true  # Necessário em ambientes como Windows/WSL2
     networks:
       - prw2
-
+  exemplo:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./exemplo:/usr/share/nginx/html:ro
+    networks:
+      - prw2
+      
 networks:
   prw2:
