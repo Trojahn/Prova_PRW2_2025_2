@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Documentação da API Escola</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #0001;
+            padding: 32px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            color: #2980b9;
+            margin-top: 32px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+        }
+
+        th,
+        td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+
+        th {
+            background: #ecf0f1;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .exemplo {
+            background: #f9f9f9;
+            border-left: 4px solid #2980b9;
+            padding: 8px 16px;
+            margin: 8px 0;
+            font-size: 0.98em;
+        }
+
+        .param {
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        .get {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .post {
+            color: #2980b9;
+            font-weight: bold;
+        }
+
+        .put {
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        .patch {
+            color: #8e44ad;
+            font-weight: bold;
+        }
+
+        .delete {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        td code {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Documentação da API Escola</h1>
+        <p>API RESTful para cadastro de alunos, disciplinas e matrículas.</p>
+
+        <h2>Rotas de Alunos</h2>
+        <table>
+            <tr>
+                <th>Método</th>
+                <th>Rota</th>
+                <th>Propósito</th>
+                <th>Parâmetros obrigatórios</th>
+                <th>Exemplo de saída</th>
+            </tr>
+            <tr>
+                <td class="get">GET</td>
+                <td><code>/alunos</code></td>
+                <td>Lista todos os alunos</td>
+                <td>-</td>
+                <td class="exemplo">[ { "id": 1, "nome": "João" }, ... ]</td>
+            </tr>
+            <tr>
+                <td class="post">POST</td>
+                <td><code>/alunos</code></td>
+                <td>Cria um novo aluno</td>
+                <td><span class="param">nome</span> (string)</td>
+                <td class="exemplo">{ "id": 4, "nome": "Carlos" }</td>
+            </tr>
+            <tr>
+                <td class="put">PUT</td>
+                <td><code>/alunos/:id</code></td>
+                <td>Atualiza o nome do aluno</td>
+                <td><span class="param">nome</span> (string)</td>
+                <td class="exemplo">{ "id": 2, "nome": "Maria Silva" }</td>
+            </tr>
+            <tr>
+                <td class="delete">DELETE</td>
+                <td><code>/alunos/:id</code></td>
+                <td>Remove o aluno e suas matrículas</td>
+                <td>-</td>
+                <td class="exemplo">204 No Content</td>
+            </tr>
+        </table>
+
+        <h2>Rotas de Disciplinas</h2>
+        <table>
+            <tr>
+                <th>Método</th>
+                <th>Rota</th>
+                <th>Propósito</th>
+                <th>Parâmetros obrigatórios</th>
+                <th>Exemplo de saída</th>
+            </tr>
+            <tr>
+                <td class="get">GET</td>
+                <td><code>/disciplinas</code></td>
+                <td>Lista todas as disciplinas</td>
+                <td>-</td>
+                <td class="exemplo">[ { "id": 1, "nome": "Matemática" }, ... ]</td>
+            </tr>
+            <tr>
+                <td class="post">POST</td>
+                <td><code>/disciplinas</code></td>
+                <td>Cria uma nova disciplina</td>
+                <td><span class="param">nome</span> (string)</td>
+                <td class="exemplo">{ "id": 4, "nome": "Geografia" }</td>
+            </tr>
+            <tr>
+                <td class="put">PUT</td>
+                <td><code>/disciplinas/:id</code></td>
+                <td>Atualiza o nome da disciplina</td>
+                <td><span class="param">nome</span> (string)</td>
+                <td class="exemplo">{ "id": 2, "nome": "Português Avançado" }</td>
+            </tr>
+            <tr>
+                <td class="delete">DELETE</td>
+                <td><code>/disciplinas/:id</code></td>
+                <td>Remove a disciplina e suas matrículas</td>
+                <td>-</td>
+                <td class="exemplo">204 No Content</td>
+            </tr>
+        </table>
+
+        <h2>Rotas de Matrículas</h2>
+        <table>
+            <tr>
+                <th>Método</th>
+                <th>Rota</th>
+                <th>Propósito</th>
+                <th>Parâmetros obrigatórios</th>
+                <th>Exemplo de saída</th>
+            </tr>
+            <tr>
+                <td class="get">GET</td>
+                <td><code>/matriculas</code></td>
+                <td>Lista todas as matrículas</td>
+                <td>-</td>
+                <td class="exemplo">[ { "id": 1, "alunoId": 1, "disciplinaId": 1, "nota": 8.5 }, ... ]</td>
+            </tr>
+            <tr>
+                <td class="post">POST</td>
+                <td><code>/matriculas</code></td>
+                <td>Cria uma matrícula</td>
+                <td>
+                    <span class="param">alunoId</span> (int),
+                    <span class="param">disciplinaId</span> (int),
+                    <span class="param">nota</span> (float, 0-10)
+                </td>
+                <td class="exemplo">{ "id": 4, "alunoId": 2, "disciplinaId": 3, "nota": 7.0 }</td>
+            </tr>
+            <tr>
+                <td class="patch">PATCH</td>
+                <td><code>/matriculas/:id</code></td>
+                <td>Atualiza a nota da matrícula</td>
+                <td><span class="param">nota</span> (float, 0-10)</td>
+                <td class="exemplo">{ "id": 2, "nota": 9.5 }</td>
+            </tr>
+            <tr>
+                <td class="delete">DELETE</td>
+                <td><code>/matriculas/:id</code></td>
+                <td>Remove a matrícula</td>
+                <td>-</td>
+                <td class="exemplo">204 No Content</td>
+            </tr>
+        </table>
+
+        <h2>Observações</h2>
+        <ul>
+            <li>Todos os endpoints retornam JSON.</li>
+            <li>Parâmetros obrigatórios devem ser enviados no corpo da requisição (<code>POST</code>, <code>PUT</code>,
+                <code>PATCH</code>).
+            </li>
+            <li>IDs são inteiros autoincrementados.</li>
+            <li>Ao remover aluno ou disciplina, todas as matrículas relacionadas também são removidas.</li>
+            <li>Notas devem ser números entre 0 e 10.</li>
+        </ul>
+    </div>
+</body>
+
+</html>
