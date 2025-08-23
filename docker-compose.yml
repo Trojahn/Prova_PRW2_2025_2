@@ -3,3 +3,19 @@ services:
     build: ./backend
     ports:
       - "3000:3000"
+    networks:
+      - prw2
+  react:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules  # Evita conflito com node_modules local
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # Necessário em ambientes como Windows/WSL2
+    networks:
+      - prw2
+
+networks:
+  prw2:

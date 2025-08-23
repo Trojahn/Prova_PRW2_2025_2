@@ -4,12 +4,24 @@ import { open } from "sqlite";
 import { readFile } from "fs/promises";
 
 const app = express();
-app.use(express.json());
+
 
 // Cria ou abre o banco
 const db = await open({ filename: "./db.sqlite", driver: sqlite3.Database });
 await db.exec("PRAGMA foreign_keys = ON;");
 
+
+// Adiciona suporte a CORS
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  if (req.method === "OPTIONS") return res.sendStatus(204);
+  next();
+});
+
+
+app.use(express.json());
 // ======================== Rotas ========================
 // -------- Alunos --------
 app.get("/alunos", async (req, res) => {
@@ -91,15 +103,15 @@ app.get("/matriculas", async (req, res) => {
 });
 
 app.post("/matriculas", async (req, res) => {
-  if (!req.body?.alunoId || !req.body?.disciplinaId || !req.body?.nota) {
+  if (!req.body?.alunoId || !req.body?.disciplinaId || isNaN(req.body?.nota) || isNaN(req.body?.disciplinaId) || isNaN(req.body?.alunoId)) {
     return res.status(400).json({ erro: "Parâmetros incorretos" });
   }
 
   try {
     const result = await db.run(
       "INSERT INTO matriculas(alunoId, disciplinaId, nota) VALUES(?, ?, ?)",
-      req.body.alunoId,
-      req.body.disciplinaId,
+      parseInt(req.body.alunoId),
+      parseInt(req.body.disciplinaId),
       req.body.nota
     );
     res.status(201).json({ id: result.lastID, alunoId: req.body.alunoId, disciplinaId: req.body.disciplinaId, nota: req.body.nota });
@@ -110,19 +122,19 @@ app.post("/matriculas", async (req, res) => {
 
 app.patch("/matriculas/:id", async (req, res) => {
   const { id } = req.params;
-  if (!req.body?.nota) {
+  if (isNaN(req.body?.nota)) {
     return res.status(400).json({ erro: "Parâmetros incorretos" });
   }
   try {
     const result = await db.run(
       "UPDATE matriculas SET nota=? WHERE id=?",
-      req.body.nota,
+      parseFloat(req.body.nota),
       id
     );
     if (result.changes === 0) {
       return res.status(404).json({ erro: "Matrícula não encontrada" });
     }
-    res.json({ id: Number(id), nota: req.body.nota });
+    res.json({ id: Number(id), nota: parseFloat(req.body.nota) });
   } catch (err) {
     res.status(400).json({ erro: err.message });
   }
