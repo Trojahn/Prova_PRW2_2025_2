@@ -23,43 +23,22 @@ docker compose up --build
 Se o processo acabar com sucesso, você poderá acessar o website resultante em
 
 
-## 🚀 Endereços para acesso
+## ☕ Endereços para acesso
 
-A documentação do backend, suas rotas e formas de acesso, podem ser utilizados no endeço abaixo:
+A documentação do backend, suas rotas e formas de acesso, pode ser acessada no endereço abaixo:
 
 ```
 http://localhost:3000
 ```
 
-
-
-
-
-
-
-### Editar o package.json
-
-Primeiro, na pasta do projeto, remova todas as informações do conteiner e imagem antigos com o seguinte comando:
+A aplicação de exemplo, executando sobre o backend desenvolvido, pode ser acessada no endereço abaixo:
 
 ```
-docker compose down -v
+http://localhost:8080
 ```
 
-Depois, edite o arquivo *package.json* adicionando as dependências necessárias. Depois de finalizado, execute o projeto normalmente.
-
-### Instalando via npm install
-
-Com o projeto em execução, abra outro terminal na mesma pasta do projeto e execute o comando.
+Por fim, a aplicação a ser desenvolvida na pasta frontend pode ser acessada no endereço abaixo:
 
 ```
-docker compose exec react bash
+http://localhost:5173
 ```
-
-Execute então a instalação das bibliotecas usando o comando **npm install**.
-
-## ☕ Codificando
-
-Altere o diretamente os arquivos de código-fonte na pasta `src`. O sistema suporta *hot reload*, ou seja, basta salvar seu código-fonte que a página do navegador será atualizada automaticamente.
-
-
-
